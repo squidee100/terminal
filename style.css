@@ -1,0 +1,116 @@
+:root {
+    --primary: #a5a5a5;
+    --secondary: #161616;
+}
+
+* {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--primary);
+    background-color: var(--secondary);
+    cursor: default;
+    font-size: 12px;
+}
+
+html, body {
+    margin: 0px;
+}
+
+#container {
+    width: 100%;
+}
+
+#output {
+    padding: 0.5% 0px 0px 0.5%;
+    margin: 30px auto;
+    display: block;
+    width: 80vw;
+    height: 80vh;
+    border-radius: 5px 5px 0px 0px;
+    border: 1px solid var(--primary);
+    resize: none;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    word-wrap: break-word;
+}
+
+#inputContainer {
+    position: relative;
+    width: 80vw;
+    margin: -30px auto;
+}
+
+#input {
+    padding-left: 1%;
+    display: block;
+    width: 100%;
+    border-radius: 0px 0px 5px 5px;
+    border: 1px solid var(--primary);
+    border-top: 0px;
+    box-sizing: border-box;
+    cursor: text;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#inputPrefix {
+    position: absolute;
+    left: 0.5%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+#output:focus {
+    outline: none;
+}
+
+#input:focus {
+    outline: none;
+}
+
+::-moz-selection {
+    color: var(--secondary);
+    background: var(--primary);
+}
+  
+::selection {
+    color: var(--secondary);
+    background: var(--primary);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+}
+
+#autocomplete {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 17px;
+    left: 20vw;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+#autocomplete ul {
+    background-color: transparent;
+    list-style: none;
+    padding-left: 0px;
+    margin: 0px;
+}
+
+#autocomplete li {
+    background-color: transparent;
+}
+
+#autocomplete li:hover {
+    background-color: var(--primary);
+    color: var(--secondary);
+}

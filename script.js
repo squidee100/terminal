@@ -42,13 +42,14 @@ function UpdateOutputBuffer() {
     outputBox.innerHTML = null; // Clear "textarea"
     for (i = 0; i < lines.length; i++) { // Repeat through
         var color;
-        if (lines[i][1] == "") {
+        var type = lines[i][1];
+        if (type == "") {
             color = "#a5a5a5";
         }
-        else if (lines[i][1] == "info") {
+        else if (type == "info") {
             color = infoColor;
         }
-        else if (lines[i][1] == ("warn")) {
+        else if (type == ("warn")) {
             color = warnColor;
         }
         else {
@@ -97,9 +98,10 @@ function CheckAutocomplete(input, hide) {
         }
     }
 
-    for (var i = 0; i < autocompleteDiv.childElementCount; i++) {
-        autocompleteDiv.children[i].addEventListener("click", function() { // Add an event listener to all current autocomplete items
-            inputBox.value = this.children[0].innerHTML; // Set input value
+    $(autocompleteDiv.children[i]).off(); // Remove previous event listeners
+    for (var i = 0; i < autocompleteDiv.children[0].childElementCount; i++) {
+        $(autocompleteDiv.children[0].children[i]).on("click", function() { // Add an event listener to all current autocomplete items
+            inputBox.value = this.innerHTML; // Set input value
             CheckAutocomplete(inputBox.value, true);
         })
     }

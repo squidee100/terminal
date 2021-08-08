@@ -17,10 +17,16 @@ inputBox.addEventListener("keydown", function(e) {
     if (e.key == "Enter") { // Check for "enter" press from user
         var input = inputBox.value.trim(); // Trim leading and trailing white spaces from string input
 
-        if (input in commands) { // Check if command exists
-            var cmd = commands[input];
+        if (input.split(" ")[0] in commands) { // Check if command exists (ruling out args)
+            var cmd = commands[input.split(" ")[0]]; // Init variable as first part of input (command)
+            var arg1 = input.split(" ")[1]; // Init variable as second part of input (argument 1)
             if (cmd.type == "") {
-                lines.push([`${input}<br>${cmd.run()}`, cmd.type]); // Push input to to log without type prefix
+                if (cmd.arg && arg1 != undefined) { // Check if commands needs argeters
+                    lines.push([`${input}<br>${arg1}<br>${cmd.run()}<br>true`, cmd.type]); // Push input to to log without type prefix
+                }
+                else {
+                    lines.push([`${input}<br>${cmd.run()}<br>false`, cmd.type])
+                }
             }
             else {
                 lines.push([`${input}<br>[${cmd.type.toUpperCase()}]${cmd.run()}`, cmd.type]); // Push input to to log with type prefix
@@ -63,28 +69,41 @@ function UpdateOutputBuffer() {
 
 commands.help = {
     type: "",
+    arg: false,
     run: function() {
         return(`Commands: ${Object.getOwnPropertyNames(commands).toString()}`)
     }
 }
 commands.info = {
     type: "info",
+    arg: false,
     run: function() {
         return('Developer: Zane "squidee_" Shaw')
     }
 }
 commands.warn = {
     type: "warn",
+    arg: false,
     run: function() {
         return("Uh oh! Something bad probably happened...")
     }
 }
 commands.error = {
     type: "error",
+    arg: false,
     run: function() {
         return("Unhandled command! Please contact the developer.")
     }
 }
+commands.sum = {
+    type: "",
+    arg: true,
+    run: function() {
+        var blah = 1 + 2;
+        return(blah)
+    }
+}
+
 
 function CheckAutocomplete(input, hide) {
     autocompleteDiv.style.left = `${inputBox.selectionStart * 7.175 + 25}px`;
